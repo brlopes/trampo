@@ -1,0 +1,125 @@
+<!doctype html>
+<head>
+    <title>NOTIFY</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta charset="UTF-8">
+    <meta name="description" content="notification system">
+    <meta name="keywords" content="notifications,online,offline,locomotives">
+    <meta name="author" content="PTC Interns">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+    <script>
+    $(document).ready( function () {
+        getWatcherStatus();
+    } );
+        function myFunction() {
+            location.reload();
+        }
+        function getWatcherStatus(){
+            $.ajax({
+                url: 'notifyStatus.php',
+                type: 'post',
+                success: function(output) {
+                    if(output=="1") {
+                        $("#notify_status").html( '<div id="notify_status" style="display:inline; color:green; font-weight:bold;">Online</div>' );
+                    } else if(output=="0") {
+                        $("#notify_status").html( '<div id="notify_status" style="display:inline; color:red; font-weight:bold;">Offline</div>' );
+                    }
+                }
+            });
+        }
+
+    </script>
+</head>
+<html>
+<body>
+<h3>NOTIFICATION SETUP</h3>
+<br>
+<form action="web_notification.php" method="post">
+    <b>To</b> email:
+    <input type="text" name="emailto" maxlength="50 ">
+    <br>
+    <b>From</b> LOCOMOTIVE &nbsp;
+        <select name="locomotives">
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="751">751</option>
+            <option value="1195">1195</option>
+            <option value="1281">1281</option>
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+            <option value="2003">2003</option>
+            <option value="2004">2004</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2008">2008</option>
+            <option value="3001">3001</option>
+            <option value="3002">3002</option>
+            <option value="3003">3003</option>
+            <option value="3004">3004</option>
+            <option value="3005">3005</option>
+            <option value="3006">3006</option>
+            <option value="3007">3007</option>
+            <option value="3008">3008</option>
+            <option value="3009">3009</option>
+            <option value="3010">3010</option>
+            <option value="3011">3011</option>
+            <option value="3012">3012</option>
+            <option value="3013">3013</option>
+            <option value="3014">3014</option>
+            <option value="3015">3015</option>
+            <option value="4001">4001</option>
+            <option value="4002">4002</option>
+            <option value="4003">4003</option>
+            <option value="4004">4004</option>
+            <option value="4005">4005</option>
+            <option value="4006">4006</option>
+            <option value="4007">4007</option>
+            <option value="4008">4008</option>
+            <option value="4009">4009</option>
+            <option value="4010">4010</option>
+            <option value="4011">4011</option>
+            <option value="4012">4012</option>
+            <option value="4013">4013</option>
+            <option value="4014">4014</option>
+            <option value="4015">4015</option>
+            <option value="4016">4016</option>
+            <option value="4317">4317</option>
+            <option value="4318">4318</option>
+            <option value="4319">4319</option>
+            <option value="4320">4320</option>
+            <option value="4321">4321</option>
+            <option value="4322">4322</option>
+            <option value="4323">4323</option>
+            <option value="4324">4324</option>
+            <option value="4325">4325</option>
+            <option value="4326">4326</option>
+            <option value="4327">4327</option>
+            <option value="4328">4328</option>
+            <option value="4330">4330</option>
+            <option value="4331">4331</option>
+        </select>
+    <select name="device">
+        <option value="radio">Radio</option>
+        <option value="cell">Cell</option>
+        <option value="wifi">Wifi</option>
+    </select>
+        <select name="status">
+            <option value="online">online</option>
+            <option value="offline">offline</option>
+        </select>
+        <select name="alert">
+            <option value="single">Single Alert</option>
+            <option value="repeat">Repeated Alerts</option>
+        </select>
+
+        <button type="submit" value="submit" onclick="myFunction(true)">Configure Notification</button>
+        </form>
+    <br>
+</form>
+<div id="notify_status" style="display:inline; color:blue; font-weight:bold;">Loading...</div> recursive_notification_check.py<br>
+<hr>
+</body>
+</html>

@@ -1,0 +1,50 @@
+# ITCM Event Notification
+
+The event notification serves the purpose of notifying individual users based on a combination of TMC triggered events:
+
+  - Device type: Wifi / Cell / Radio
+  - Event type: Online / Offline
+  - Locomotive ID
+
+There are 2 Python scripts that are responsible for the notification system. The ```event_notification.py``` stores event requests via web interface using php to calls, its main functionality surrounds a quick JSON table (containing current locomotive status) check prior to storing new notifications to its SQLite database. If the status requested matches the current status of a locomotive, the user is warned and the notification request is not stored. If the status does not match data inside the JSON table then a new row is created inside the notifications database.
+
+The ```recursive_notification_check.py``` compares the JSON table against the database every 15 seconds, if a match is found, it will email its respective user with more detailed information about the event, the script will also delete the row inside the database. If there is a need for repeated notifications, the script will add a total count of 10 notifications for the requested event and send 10 consecutive emails every 15 seconds.
+
+We also included a toggle (ON/OFF) button and a status indicator for the ```recursive_notification_check.py```, required to all continuously running scripts
+
+> This functionality was built with the intention of allowing staff to automate observation on changes in locomotives events, where change of events are trigger by the device itself facilitating independent monitoring (24/7).
+
+### Version
+2.14
+
+### Code
+
+The Script can be currently test on its [Notification web interface](http://192.168.142.159/test/b/web_ssh/web_notifications.html), note that it is not currently under production and only checking locomotive status against an [offline version](http://192.168.142.159/test/b/web_ssh/Loco.json) of the JSON table
+
+Currently under //192.168.142.159/test/b/web_ssh:
+
+```sh
+event_notification.py
+recursive_notification_check.py
+notifyStatus.php
+toggle_notification.php
+web_notification.php
+web_notifications.html
+Loco.json **
+notifications.db **
+phpCall.sh **
+phpRecursive.sh **
+```
+> ** subject to change.
+
+### Imported Libraries
+
+* smtplib, email
+* json, sqlite3
+* sys, datetime, time
+* OneDrive
+
+
+### Development
+
+Currently integrating to the new version of loco_watcher, also integrating the script monitoring status to the other running scripts (2.14).
